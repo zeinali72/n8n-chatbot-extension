@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n8n Assist Extension Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .info-box {
+            background: #f0f8ff;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .steps {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .step {
+            margin: 15px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .step:last-child {
+            border-bottom: none;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🤖 n8n Assist Chrome Extension</h1>
+        <p>AI-powered assistant for n8n workflows using OpenRouter API</p>
+    </div>
+
+    <div class="success">
+        <h3>✅ Extension Successfully Built!</h3>
+        <p>Your n8n chatbot extension has been compiled and is ready for testing.</p>
+    </div>
+
+    <div class="info-box">
+        <h3>📂 Files Generated:</h3>
+        <ul>
+            <li><code>dist/manifest.json</code> - Extension manifest</li>
+            <li><code>dist/js/background.js</code> - Background service worker</li>
+            <li><code>dist/js/content.js</code> - Content script for injection</li>
+            <li><code>dist/js/options.js</code> - Options page script</li>
+            <li><code>dist/options.html</code> - Settings page</li>
+            <li><code>dist/assets/index.css</code> - Styles</li>
+        </ul>
+    </div>
+
+    <div class="steps">
+        <h3>🚀 How to Install & Test:</h3>
+        
+        <div class="step">
+            <strong>1. Open Chrome Extensions Page</strong>
+            <p>Navigate to <code>chrome://extensions/</code> in your Chrome browser</p>
+        </div>
+
+        <div class="step">
+            <strong>2. Enable Developer Mode</strong>
+            <p>Toggle the "Developer mode" switch in the top-right corner</p>
+        </div>
+
+        <div class="step">
+            <strong>3. Load Unpacked Extension</strong>
+            <p>Click "Load unpacked" and select the <code>dist</code> folder from this project</p>
+        </div>
+
+        <div class="step">
+            <strong>4. Configure Settings</strong>
+            <p>Click on the extension icon in Chrome toolbar, then go to "Options" to set up your OpenRouter API key</p>
+        </div>
+
+        <div class="step">
+            <strong>5. Test the Extension</strong>
+            <p>Visit any website to see the floating chat button in the bottom-right corner</p>
+        </div>
+    </div>
+
+    <div class="warning">
+        <h3>⚙️ Required Setup:</h3>
+        <p><strong>OpenRouter API Key:</strong> Get your free API key from <a href="https://openrouter.ai/keys" target="_blank">OpenRouter.ai</a></p>
+        <p>You'll need this to configure the AI model in the extension settings.</p>
+    </div>
+
+    <div class="info-box">
+        <h3>🎯 Features:</h3>
+        <ul>
+            <li>Floating chat interface that appears on all websites</li>
+            <li>AI-powered responses using OpenRouter API</li>
+            <li>Specialized for n8n workflow assistance</li>
+            <li>Markdown support for formatted responses</li>
+            <li>Easy settings management</li>
+            <li>Persistent chat history during session</li>
+        </ul>
+    </div>
+
+    <div class="steps">
+        <h3>🛠️ Development Commands:</h3>
+        <div class="step">
+            <strong>Build for production:</strong> <code>npm run build</code>
+        </div>
+        <div class="step">
+            <strong>Development mode:</strong> <code>npm run dev</code>
+        </div>
+        <div class="step">
+            <strong>Run tests:</strong> <code>npm test</code>
+        </div>
+    </div>
+</body>
+</html>

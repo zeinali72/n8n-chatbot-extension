@@ -11,30 +11,28 @@ const OptionsPage: React.FC = () => {
 
   const loadModels = useCallback(async (key: string) => {
     if (!key) return;
-    
+
     setIsLoading(true);
     try {
       const response = await chrome.runtime.sendMessage({ 
         type: 'GET_MODELS', 
         data: { apiKey: key } 
       });
-      
-      if (response.success) {
-        // Filter for popular models that work well for chat
-        const popularModels = response.data.filter((model: OpenRouterModel) => 
-          model.id.includes('gpt-') || 
-          model.id.includes('claude-') || 
-          model.id.includes('llama-') ||
-          model.id.includes('gemini-')
-        ).slice(0, 20); // Limit to first 20 models
-        
-        setModels(popularModels);
-        showMessage('Models loaded successfully!', 'success');
+
+      if (response.success && Array.isArray(response.data)) {
+        setModels(response.data);
+        if (response.data.length > 0) {
+          showMessage('Models loaded successfully!', 'success');
+        } else {
+           showMessage('API key is valid, but no models were found.', 'error');
+        }
       } else {
-        showMessage(response.error || 'Failed to load models', 'error');
+        showMessage(response.error || 'Failed to load models. Check your API key.', 'error');
+        setModels([]);
       }
     } catch {
-      showMessage('Failed to fetch models', 'error');
+      showMessage('An error occurred while fetching models.', 'error');
+      setModels([]);
     } finally {
       setIsLoading(false);
     }
@@ -152,14 +150,20 @@ const OptionsPage: React.FC = () => {
               value={selectedModel}
               onChange={(e) => setSelectedModel(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
-              disabled={models.length === 0}
+              disabled={isLoading || models.length === 0}
             >
-              <option value="">Select a model...</option>
-              {models.map((model) => (
-                <option key={model.id} value={model.id}>
-                  {model.name || model.id}
-                </option>
-              ))}
+              {isLoading && <option>Loading models...</option>}
+              {!isLoading && models.length === 0 && <option>Enter a valid API key above</option>}
+              {!isLoading && models.length > 0 && (
+                <>
+                  <option value="">Select a model...</option>
+                  {models.map((model) => (
+                    <option key={model.id} value={model.id}>
+                      {model.name || model.id}
+                    </option>
+                  ))}
+                </>
+              )}
             </select>
             {models.length === 0 && apiKey && (
               <p className="mt-1 text-sm text-gray-500">
